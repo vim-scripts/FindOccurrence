@@ -6,7 +6,7 @@ This plugin adds the following features to the default Vim mappings for
 - ]I et al. not only list the occurrences, but ask for the occurrence number
   to jump to.
 - ]I et al. also work in visual mode, searching for the selection instead of
-  the keyword under cursor.
+  the word under cursor.
 - New ]n ]N ]<C-N> <C-W>n <C-W><C-N> mappings that operate on the
   last search pattern.
 - New ]/ <C-W>/ mappings that query and then operate on a pattern.
@@ -16,7 +16,8 @@ Based on the Vim Tip "Search visually":
     http://vim.wikia.com/wiki/Search_visually
 
 USAGE
-List occurrences of word under cursor / visual selection:
+List occurrences of \<word\> under cursor / word under cursor (g[I) / visual
+selection:
 With any [count], also includes 'comment'ed lines.
 [count][I               List all occurrences in the file. (Like :ilist)
 [count]]I               List occurrences from the cursor position to end of
@@ -83,7 +84,7 @@ NOTES
   for the occurrence number to jump to, <C-X> directly jumps to the
   occurrence, <C-W>x and <C-W><C-X> split the window and jump to the
   occurrence.
-- i I <Tab> <C-W>i <C-W><Tab> for keyword under cursor.
+- i I <Tab> <C-W>i <C-W><Tab> for word under cursor.
 - d D <C-D> <C-W>d <C-W><C-D> for macro definition under cursor.
 - n N <C-N> <C-W>n <C-W><C-N> for last search pattern.
 - / <C-W>/                    for queried pattern.

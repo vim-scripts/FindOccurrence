@@ -3,13 +3,16 @@
 " DEPENDENCIES:
 "   - FindOccurrence.vim autoload script
 "
-" Copyright: (C) 2008-2012 Ingo Karkat
+" Copyright: (C) 2008-2014 Ingo Karkat
 "   The VIM LICENSE applies to this script; see ':help copyright'.
 "
 " Maintainer:	Ingo Karkat <ingo@karkat.de>
 " Source: http://vim.wikia.com/wiki/Search_visually
 "
 " REVISION	DATE		REMARKS
+"   1.01.011	26-Apr-2014	ENH: Add g[I and g[<Tab> mappings that search
+"				for the word (not the \<word\>) under the
+"				cursor, like * and g*.
 "   1.00.010	23-Aug-2012	Split off autoload script and documentation.
 "	009	15-Jul-2010	BUG: Accidentally removed queried pattern from
 "				the input history if the user cancels out of
@@ -49,16 +52,20 @@ if exists('g:loaded_FindOccurrence') || (v:version < 700)
 endif
 let g:loaded_FindOccurrence = 1
 
-xnoremap <silent> [i         :<C-u>call FindOccurrence#Find('v', 'search', 1)<CR>
-xnoremap <silent> ]i         :<C-u>call FindOccurrence#Find('v', 'search', 0)<CR>
-nnoremap <silent> [I         :<C-u>call FindOccurrence#Find('n', 'list', 1)<CR>
-xnoremap <silent> [I         :<C-u>call FindOccurrence#Find('v', 'list', 1)<CR>
-nnoremap <silent> ]I         :<C-u>call FindOccurrence#Find('n', 'list', 0)<CR>
-xnoremap <silent> ]I         :<C-u>call FindOccurrence#Find('v', 'list', 0)<CR>
-nnoremap <silent> [<Tab>     :<C-u>call FindOccurrence#Find('n', 'jump', 1)<CR>
-xnoremap <silent> [<Tab>     :<C-u>call FindOccurrence#Find('v', 'jump', 1)<CR>
-nnoremap <silent> ]<Tab>     :<C-u>call FindOccurrence#Find('n', 'jump', 0)<CR>
-xnoremap <silent> ]<Tab>     :<C-u>call FindOccurrence#Find('v', 'jump', 0)<CR>
+xnoremap <silent>  [i        :<C-u>call FindOccurrence#Find('v', 'search', 1)<CR>
+xnoremap <silent>  ]i        :<C-u>call FindOccurrence#Find('v', 'search', 0)<CR>
+nnoremap <silent> g[I        :<C-u>call FindOccurrence#Find('N', 'list', 1)<CR>
+nnoremap <silent>  [I        :<C-u>call FindOccurrence#Find('n', 'list', 1)<CR>
+xnoremap <silent>  [I        :<C-u>call FindOccurrence#Find('v', 'list', 1)<CR>
+nnoremap <silent>  ]I        :<C-u>call FindOccurrence#Find('n', 'list', 0)<CR>
+nnoremap <silent> g]I        :<C-u>call FindOccurrence#Find('N', 'list', 0)<CR>
+xnoremap <silent>  ]I        :<C-u>call FindOccurrence#Find('v', 'list', 0)<CR>
+nnoremap <silent>  [<Tab>    :<C-u>call FindOccurrence#Find('n', 'jump', 1)<CR>
+nnoremap <silent> g[<Tab>    :<C-u>call FindOccurrence#Find('N', 'jump', 1)<CR>
+xnoremap <silent>  [<Tab>    :<C-u>call FindOccurrence#Find('v', 'jump', 1)<CR>
+nnoremap <silent>  ]<Tab>    :<C-u>call FindOccurrence#Find('n', 'jump', 0)<CR>
+nnoremap <silent> g]<Tab>    :<C-u>call FindOccurrence#Find('N', 'jump', 0)<CR>
+xnoremap <silent>  ]<Tab>    :<C-u>call FindOccurrence#Find('v', 'jump', 0)<CR>
 
 
 nnoremap <silent> [n         :<C-u>call FindOccurrence#Find('/', 'search', 1)<CR>

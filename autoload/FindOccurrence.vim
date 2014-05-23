@@ -13,6 +13,9 @@
 " Source: http://vim.wikia.com/wiki/Search_visually
 "
 " REVISION	DATE		REMARKS
+"   1.01.018	26-Apr-2014	ENH: Add mode "N" that searches for the word
+"				(not the \<word\>) under the cursor, like * and
+"				g*.
 "   1.00.017	10-Apr-2014	I18N: Visual reselection is off for multi-byte
 "				characters due to mismatch of byte length and
 "				character count. Use strchars() instead. No need
@@ -148,8 +151,10 @@ function! FindOccurrence#Find( mode, operation, isEntireBuffer )
     let s:reselectionDelay = 1
     let l:selectionLength = 0
 
-    if a:mode ==# 'n' " Normal mode, use word under cursor.
+    if a:mode ==# 'n' " Normal mode, use \<word\> under cursor.
 	let s:pattern = '/' . ingo#regexp#FromLiteralText(expand('<cword>'), 1, '') . '/'
+    elseif a:mode ==# 'N' " Normal mode, use word under cursor.
+	let s:pattern = '/' . ingo#regexp#FromLiteralText(expand('<cword>'), 0, '') . '/'
     elseif a:mode ==# 'v' " Visual mode, use selection.
 	execute 'normal! gvy'
 	let s:pattern = '/\V' . substitute(escape(@@, '/\'), "\n", '\\n', 'g') . '/'
